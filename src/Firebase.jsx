@@ -59,3 +59,6 @@ export default getFirestore(firebaseApp);
 export function DeleteDoc(id) {
   deleteDoc(doc(getFirestore(firebaseApp), "content", id));
 }
+
+//UpdateDoc
+export function UpdateDOc(id) {}
