@@ -1,12 +1,11 @@
-import db from "../Firebase";
+import db from "../../Firebase";
 import { doc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { DeleteDoc } from "../Firebase";
-import EditContent from "./CMS/EditContent";
-import Form from "./CMS/Form.jsx";
-import ContentInfo from "./CMS/ContentInfo";
+import { DeleteDoc } from "../../Firebase";
+
+import ContentInfo from "./ContentInfo";
 
 export default function Content() {
   const [content, setContent] = useState([]);
@@ -21,8 +20,6 @@ export default function Content() {
 
   return (
     <div className="max-w-4xl m-auto my-10">
-      <Form />
-
       <div className="border rounded-lg">
         {content.map((info) => (
           <div

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, deleteDoc } from "firebase/firestore";
+import { getFirestore, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {
   getAuth,
   onAuthStateChanged,
@@ -56,9 +56,13 @@ export const monitorAuthState = async () => {
 export default getFirestore(firebaseApp);
 
 //DeleteDoc
-export function DeleteDoc(id) {
+export function deleteCourse(id) {
   deleteDoc(doc(getFirestore(firebaseApp), "content", id));
 }
 
-//UpdateDoc
-export function UpdateDOc(id) {}
+//UpdateDescrt
+export function updateDescrt(id, change) {
+  updateDoc(doc(getFirestore(firebaseApp), "content", id), {
+    descrt: change,
+  });
+}

@@ -1,8 +1,6 @@
 import "./App.css";
 import Authentication from "./Components/Authentication/Authentication.jsx";
 import Cms from "./Components/CMS/Cms";
-import Content from "./Components/Content";
-import Signout from "./Components/Authentication/Signout";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
