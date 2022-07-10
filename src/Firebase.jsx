@@ -50,9 +50,16 @@ export function deleteCourse(id) {
   deleteDoc(doc(getFirestore(firebaseApp), "content", id));
 }
 
-//UpdateDescrt
+//Update Descrt
 export function updateDescrt(id, change) {
   updateDoc(doc(getFirestore(firebaseApp), "content", id), {
     descrt: change,
+  });
+}
+
+//Update Title
+export function updateTitle(id, change) {
+  updateDoc(doc(getFirestore(firebaseApp), "content", id), {
+    title: change,
   });
 }
