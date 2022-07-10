@@ -12,9 +12,9 @@ export default function ContentInfo({ info }) {
   const cancelButtonRef = useRef(null);
 
   const [editTitle, setEditTitle] = useState(false);
-  const [titleChange, setTitleChange] = useState();
+  const [titleChange, setTitleChange] = useState("");
   function update(id, titleChange) {
-    updateTitle(id, titleChange);
+    titleChange === "" ? setEditTitle(false) : updateTitle(id, titleChange);
     setEditTitle(false);
   }
 
@@ -84,7 +84,7 @@ export default function ContentInfo({ info }) {
                               <input
                                 type="text"
                                 defaultValue={info.title}
-                                className="border w-auto"
+                                className="border w-fit"
                                 onChange={(e) => setTitleChange(e.target.value)}
                               ></input>
                               <button

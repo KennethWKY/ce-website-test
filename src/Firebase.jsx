@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebaseConfig";
-
 import { getFirestore, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {
   getAuth,
@@ -17,7 +16,7 @@ import {
 const firebaseApp = initializeApp(firebaseConfig);
 
 //Auth
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 export const loginEmailPassword = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password)
@@ -32,8 +31,8 @@ export const logout = async () => {
   await signOut(auth);
 };
 
-export const monitorAuthState = async () => {
-  onAuthStateChanged(auth, (user) => {
+export const monitorAuthState = () => {
+  firebaseApp.onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log(user.email);
     } else {
