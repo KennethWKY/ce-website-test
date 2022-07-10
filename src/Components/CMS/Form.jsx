@@ -10,13 +10,21 @@ export default function Form() {
 
   const input_title = useRef();
   const input_descr = useRef();
+  const input_signupForm = useRef();
 
   function submitForm(e) {
     e.preventDefault();
     const title = input_title.current.value;
     const descrt = input_descr.current.value;
+    const signupForm = input_signupForm.current.value;
     const id = uuidv4();
-    const info = { title: title, descrt: descrt, id: id, signup: [] };
+    const info = {
+      title: title,
+      descrt: descrt,
+      id: id,
+      signupForm: signupForm,
+      signup: [],
+    };
     setDoc(doc(db, "content", id), info);
     setOpen(false);
   }
@@ -119,6 +127,20 @@ export default function Form() {
                                 placeholder=""
                                 defaultValue={""}
                                 ref={input_descr}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-span-3 sm:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 sm:text-lg">
+                              Sign-up Form Link
+                            </label>
+                            <div className="mt-1 flex rounded-md shadow-sm">
+                              <input
+                                type="text"
+                                className="focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 flex-1 block w-full rounded-none rounded-r-md sm:text-md border-gray-300"
+                                placeholder=""
+                                ref={input_signupForm}
                               />
                             </div>
                           </div>
