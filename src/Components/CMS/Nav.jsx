@@ -16,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav() {
+export default function Nav({ user }) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -56,6 +56,7 @@ export default function Nav() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="hidden md:block">Sign in as: {user.name}</div>
                 <Form />
                 <Signout />
               </div>

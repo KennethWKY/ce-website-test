@@ -3,8 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import EditContent from "./EditContent";
 import DeleteContent from "./DeleteContent";
-import EditTitle from "./EditTitle";
-import { updateTitle } from "../../Firebase";
+import { updateTitle, updateLink } from "../../Firebase";
 
 export default function ContentInfo({ info }) {
   const [open, setOpen] = useState(false);
@@ -13,9 +12,16 @@ export default function ContentInfo({ info }) {
 
   const [editTitle, setEditTitle] = useState(false);
   const [titleChange, setTitleChange] = useState("");
-  function update(id, titleChange) {
+  function update_title(id, titleChange) {
     titleChange === "" ? setEditTitle(false) : updateTitle(id, titleChange);
     setEditTitle(false);
+  }
+
+  const [editLink, setEditLink] = useState(false);
+  const [linkChange, setlinkChange] = useState("");
+  function update_Link(id, linkChange) {
+    linkChange === "" ? setEditLink(false) : updateLink(id, linkChange);
+    setEditLink(false);
   }
 
   useEffect(() => {
@@ -88,7 +94,9 @@ export default function ContentInfo({ info }) {
                                 onChange={(e) => setTitleChange(e.target.value)}
                               ></input>
                               <button
-                                onClick={() => update(info.id, titleChange)}
+                                onClick={() =>
+                                  update_title(info.id, titleChange)
+                                }
                                 className="inline-flex justify-center rounded-md shadow-sm bg-white font-medium text-green-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-0 ml-3 w-auto text-sm"
                               >
                                 <svg
@@ -136,12 +144,47 @@ export default function ContentInfo({ info }) {
 
                         <a
                           href={info.signupForm}
-                          className="w-fit inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                          className="w-fit inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-0 text-sm"
                         >
-                          按此報名
+                          Sign up
                         </a>
+                        <button
+                          onClick={() => setEditLink(true)}
+                          className="justify-start w-fit px-2 text-indigo-600"
+                        >
+                          Edit Link
+                        </button>
+
+                        {editLink ? (
+                          <div className="flex w-auto">
+                            <input
+                              type="text"
+                              defaultValue={info.signupForm}
+                              className="border w-full"
+                              onChange={(e) => setlinkChange(e.target.value)}
+                            ></input>
+                            <button
+                              onClick={() => update_Link(info.id, linkChange)}
+                              className="inline-flex justify-center rounded-md shadow-sm bg-white font-medium text-green-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-0 ml-3 w-auto text-sm"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
+
                     <div className="mt-5 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                       <button
                         type="button"

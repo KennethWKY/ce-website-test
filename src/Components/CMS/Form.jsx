@@ -11,12 +11,14 @@ export default function Form() {
   const input_title = useRef();
   const input_descr = useRef();
   const input_signupForm = useRef();
+  const submit_path = useRef();
 
   function submitForm(e) {
     e.preventDefault();
     const title = input_title.current.value;
     const descrt = input_descr.current.value;
     const signupForm = input_signupForm.current.value;
+    const path = submit_path.current.value;
     const id = uuidv4();
     const info = {
       title: title,
@@ -25,7 +27,7 @@ export default function Form() {
       signupForm: signupForm,
       signup: [],
     };
-    setDoc(doc(db, "content", id), info);
+    setDoc(doc(db, path, id), info);
     setOpen(false);
   }
 
@@ -143,6 +145,23 @@ export default function Form() {
                                 ref={input_signupForm}
                               />
                             </div>
+                          </div>
+
+                          <div className="col-span-6 sm:col-span-3">
+                            <label
+                              htmlFor="country"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Eg or ch
+                            </label>
+                            <select
+                              ref={submit_path}
+                              autoComplete="country-name"
+                              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            >
+                              <option value="egContent">English</option>
+                              <option value="content">Chinese</option>
+                            </select>
                           </div>
                         </div>
                       </div>

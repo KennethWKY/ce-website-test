@@ -62,3 +62,10 @@ export function updateTitle(id, change) {
     title: change,
   });
 }
+
+//Update link
+export function updateLink(id, change) {
+  updateDoc(doc(getFirestore(firebaseApp), "content", id), {
+    signupForm: change,
+  });
+}

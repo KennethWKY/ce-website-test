@@ -1,16 +1,11 @@
 import db from "../../Firebase";
-import { doc, collection, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import ContentInfo from "./ContentInfo";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function Content() {
+export default function Content({ user }) {
   const [content, setContent] = useState([]);
   const [egContent, setEgContent] = useState([]);
-
-  const auth = getAuth();
-  const [user] = useAuthState(auth);
 
   useEffect(
     () =>
